@@ -1,12 +1,37 @@
 <html>
-    <head></head>
-    <body>
-        <h1>FHIR DocumentReference Example</h1>
-        About FHIR DocumentReference:<br><br>
-        Please enter a link of document: (example: ) <br>
-        <input type="text">
-        <button type="button" value="CreateDocumentReference" onclick="">Create DocumentReference</button><br><br>
-        FHIR DocumentReference result: <br>
-        <textarea id="ResultTextArea" rows="4" cols="50"></textarea>
-    </body>
+
+<head></head>
+<script src="setting.js"></script>
+<script src="HTTP.js"></script>
+<script src="DocumentReferenceTemplate.js"></script>
+
+<body>
+    <h1>FHIR DocumentReference Example</h1>
+    About FHIR DocumentReference:<br><br>
+    Please enter a link of document: (example:
+    https://drive.google.com/file/d/1_9NBlkRNOt7WhFzXpl6VkeHPVYVXi3qZ/view?usp=sharing) <br>
+    <input type="text" id="DocumentUrl">
+    <button type="button" value="CreateDocumentReference" onclick="PostDocRef()">Create
+        DocumentReference</button><br><br>
+    FHIR DocumentReference id: <br>
+    <input type="text" id="DocRefId"><br>
+    FHIR DocumentReference result: <br>
+    <a href="#" id="DocRefLink" target="blank"></a><br>
+    <textarea id="ResultTextArea" rows="4" cols="50"></textarea>
+</body>
+<script>
+    function PostDocRef() {
+        var docUrl = document.getElementById("DocumentUrl").value;
+        var docRefTemplate = docRefTemp;
+        docRefTemplate.content[0].attachment.url = docUrl;
+        HTTPPostData(FHIRServer + 'DocumentReference', JSON.stringify(docRefTemplate), DisplayResult);
+    }
+    function DisplayResult(result) {
+        document.getElementById("DocRefId").value = result.id;
+        document.getElementById("ResultTextArea").value = JSON.stringify(result);
+        document.getElementById("DocRefLink").href = FHIRServer + "DocumentReference" + "/" + result.id;
+        document.getElementById("DocRefLink").innerHTML = FHIRServer + "DocumentReference" + "/" + result.id;
+    }
+</script>
+
 </html>
