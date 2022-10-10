@@ -1,9 +1,9 @@
 <html>
 
 <head></head>
-<script src="setting.js"></script>
-<script src="HTTP.js"></script>
-<script src="DocumentReferenceTemplate.js"></script>
+<script src="/JS/setting.js"></script>
+<script src="/JS/HTTP.js"></script>
+<script src="/JS/DocumentReferenceTemplate.js"></script>
 
 <body>
     <h1>FHIR DocumentReference Example</h1>
@@ -14,18 +14,24 @@
     <button type="button" value="CreateDocumentReference" onclick="PostDocRef()">Create
         DocumentReference</button><br><br>
     FHIR DocumentReference id: <br>
-    <input type="text" id="DocRefId"><br>
+    <input type="text" id="DocRefId"><br><br>
     FHIR DocumentReference result: <br>
     <a href="#" id="DocRefLink" target="blank"></a><br>
-    <textarea id="ResultTextArea" rows="4" cols="50"></textarea>
+    <textarea id="ResultTextArea" rows="30" cols="100"></textarea>
 </body>
 <script>
+    /**
+     * Post FHIR DocumentReference to FHIR Server
+    */
     function PostDocRef() {
         var docUrl = document.getElementById("DocumentUrl").value;
         var docRefTemplate = docRefTemp;
         docRefTemplate.content[0].attachment.url = docUrl;
         HTTPPostData(FHIRServer + 'DocumentReference', JSON.stringify(docRefTemplate), DisplayResult);
     }
+    /**
+     * Display result of uploaded FHIR DocumentReference
+    */
     function DisplayResult(result) {
         document.getElementById("DocRefId").value = result.id;
         document.getElementById("ResultTextArea").value = JSON.stringify(result);
