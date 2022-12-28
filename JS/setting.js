@@ -1,2 +1,2 @@
 /** FHIR Server url */
-var FHIRServer ="https://203.64.84.150:58443/portaltest1/fhir/";
+var FHIRServer ="https://203.64.84.150:58443/r5/fhir/"//"https://203.64.84.150:58443/portaltest1/fhir/";
