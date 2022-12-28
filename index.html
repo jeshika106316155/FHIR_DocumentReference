@@ -31,7 +31,7 @@
         var docRefTemplate = docRefTemp;
         docRefTemplate.subject.reference = document.getElementById("SubjectId").value;
         docRefTemplate.author[0].reference = document.getElementById("AuthorId").value;
-        docRefTemplate.custodian[0].reference = document.getElementById("OrganizationId").value;
+        docRefTemplate.custodian.reference = document.getElementById("OrganizationId").value;
         docRefTemplate.content[0].attachment.url = docUrl;
         HTTPPostData(FHIRServer + 'DocumentReference', JSON.stringify(docRefTemplate), DisplayResult);
     }
