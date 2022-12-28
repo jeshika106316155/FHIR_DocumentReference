@@ -8,6 +8,9 @@
 <body>
     <h1>FHIR DocumentReference Example</h1>
     About FHIR DocumentReference:<br><br>
+    Subject: <input type="text" id="SubjectId" value="Patient/88df8172-9f58-4a0f-bcca-bcdcd5ea6485"><br>
+    Author: <input type="text" id="AuthorId" value="PractitionerRole/af055cb6-bd06-4ce4-9967-90d4e9f25044">
+    Organization: <input type="text" id="OrganizationId" value="Organization/98a6f5c5-af58-41b5-bd6f-d8ca996b5580">
     Please enter a link of document: (example:
     https://drive.google.com/file/d/1_9NBlkRNOt7WhFzXpl6VkeHPVYVXi3qZ/view?usp=sharing) <br>
     <input type="text" id="DocumentUrl">
@@ -26,6 +29,9 @@
     function PostDocRef() {
         var docUrl = document.getElementById("DocumentUrl").value;
         var docRefTemplate = docRefTemp;
+        docRefTemplate.subject.reference = document.getElementById("SubjectId").value;
+        docRefTemplate.author[0].reference = document.getElementById("AuthorId").value;
+        docRefTemplate.custodian[0].reference = document.getElementById("OrganizationId").value;
         docRefTemplate.content[0].attachment.url = docUrl;
         HTTPPostData(FHIRServer + 'DocumentReference', JSON.stringify(docRefTemplate), DisplayResult);
     }
