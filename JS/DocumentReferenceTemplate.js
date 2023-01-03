@@ -1,5 +1,9 @@
 var docRefTemp = {
     "resourceType": "DocumentReference",
+    "identifier" : [{ 
+        "system":"Misac/Identifier",
+        "code":""
+     }],
     "status": "current",
     "subject": {
         "reference": "Patient/88df8172-9f58-4a0f-bcca-bcdcd5ea6485",
@@ -21,10 +25,6 @@ var docRefTemp = {
         "display": "MI Patient Portal"
     },
     "content": [ 
-        {
-            "attachment": {
-                "url": ""
-            }
-        }
+        
     ]
 }
