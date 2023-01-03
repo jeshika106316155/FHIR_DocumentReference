@@ -46,7 +46,7 @@
             search+="custodian="+document.getElementById("OrganizationId").value.trim()+"&";
         }
         document.getElementById("searchAPI").value = search;
-        HTTPGetData(search,DisplayResult)
+        HTTPGetData(document.getElementById("searchAPI").value,DisplayResult)
     }
 </script>
 
