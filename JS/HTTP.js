@@ -1,12 +1,12 @@
 var ret;
 //取得網路上的資源
-function HTTPGetData(urlStr) {
+function HTTPGetData(urlStr,callBack) {
     var HttpObj = new XMLHttpRequest();   
     HttpObj.onreadystatechange = function () {
         if (HttpObj.readyState === 4) {
             ret = HttpObj.responseText;
-            //   alert(ret);
-                 callBack(ret);
+            callBack(JSON.parse(ret));
+            alert(ret);
          //   alert("data retrieved");
         }
     }

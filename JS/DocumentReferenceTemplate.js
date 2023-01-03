@@ -2,7 +2,7 @@ var docRefTemp = {
     "resourceType": "DocumentReference",
     "identifier" : [{ 
         "system":"Misac/Identifier",
-        "code":""
+        "value":""
      }],
     "status": "current",
     "subject": {

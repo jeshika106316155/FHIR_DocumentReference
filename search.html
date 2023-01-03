@@ -1,0 +1,53 @@
+<html>
+<head></head>
+<script src="JS/setting.js"></script>
+<script src="JS/HTTP.js"></script>
+<script src="JS/DocumentReferenceTemplate.js"></script>
+
+<body>
+    <h1>FHIR DocumentReference Search</h1>
+    Identifier: <input type="text" id="IdentifierId" value=""><br>
+    Subject: <input type="text" id="SubjectId" value="Patient/7251379"><br>
+    <!-- 88df8172-9f58-4a0f-bcca-bcdcd5ea6485 -->
+    Author: <input type="text" id="AuthorId" value="Patient/7251379"><br>
+    Organization: <input type="text" id="OrganizationId" value="Organization/7251253"><br><br>
+    <!-- 98a6f5c5-af58-41b5-bd6f-d8ca996b5580 -->
+    Search API: <input type="text" id="searchAPI" size="70%"><br>
+    <button type="button" value="CreateDocumentReference" onclick="Search()">Search</button><br><br>
+    FHIR DocumentReference result: <br>
+    <a href="#" id="DocRefLink" target="blank"></a><br>
+    <textarea id="ResultTextArea" rows="30" cols="100"></textarea>
+</body>
+<script>
+    var search="";
+    /**
+     * Display result of uploaded FHIR DocumentReference
+    */
+    function DisplayResult(result) {
+        document.getElementById("ResultTextArea").value = JSON.stringify(result);
+        document.getElementById("DocRefLink").href = search;
+        document.getElementById("DocRefLink").innerHTML = search;
+    }
+    /**
+     * Search DocumentReference
+    */
+    function Search(){
+        search = FHIRServer +"DocumentReference?";
+        if(document.getElementById("IdentifierId").value.trim() != ""){
+            search+="identifier=Misac/Identifier|"+document.getElementById("IdentifierId").value.trim()+"&";
+        }
+        if(document.getElementById("SubjectId").value.trim() != ""){
+            search+="subject="+document.getElementById("SubjectId").value.trim()+"&";
+        }
+        if(document.getElementById("AuthorId").value.trim() != ""){
+            search+="author="+document.getElementById("AuthorId").value.trim()+"&";
+        }
+        if(document.getElementById("OrganizationId").value.trim() != ""){
+            search+="custodian="+document.getElementById("OrganizationId").value.trim()+"&";
+        }
+        document.getElementById("searchAPI").value = search;
+        HTTPGetData(search,DisplayResult)
+    }
+</script>
+
+</html>
